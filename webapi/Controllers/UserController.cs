@@ -15,70 +15,39 @@ public class UserController : ControllerBase
     private readonly IHttpContextAccessor _httpContext;
     private readonly IConfiguration _config;
     private EnergyContext db = new EnergyContext();
+    private readonly User user;
 
     public UserController(ILogger<UserController> logger, IConfiguration config, IHttpContextAccessor httpContext)
     {
         _logger = logger;
         _httpContext = httpContext;
         _config = config;
+        user = Cookie.GetCurrentUser(_config, _httpContext, db);
     }
 
     [HttpGet]
     public User GetUser()
     {
-        User user;
-
-        user = _getCurrentUser();
-
         return user;
     }
-
-    // TODO: implement forgot password et cetera
-    /*[HttpPatch]
-    public bool PatchUser(string? email, string? password)
-    {
-        User user;
-
-        user = _getCurrentUser();
-
-        if (!string.IsNullOrWhiteSpace(email)) user.Email = email;
-        if (!string.IsNullOrWhiteSpace(password)) user.SetPassword(password);
-
-        db.SaveChanges();
-
-        return true;
-    }*/
 
     [HttpDelete]
     public bool DeleteUser()
     {
-        User user;
-
-        user = _getCurrentUser();
-
         db.Users.Remove(user);
         db.SaveChanges();
 
         return true;
     }
 
-    [Route("subdev")]
+    [Route("devices")]
     [HttpGet]
     public IEnumerable<EnergyDevice> GetUserSubmittedDevices()
     {
-        User user;
         ICollection<EnergyDevice> devices;
 
-        user = _getCurrentUser();
         devices = user.SubmittedDevices;
 
         return devices;
-    }
-
-
-    // shorthand for usability
-    private User _getCurrentUser()
-    {
-        return Cookie.GetCurrentUser(_config, _httpContext, db);
     }
 }
