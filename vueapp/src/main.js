@@ -1,13 +1,14 @@
+import './styles/tailwind.css';
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router';
 import { createApp } from 'vue';
 import App from './App.vue'
-import HelloWorld from './components/HelloWorld.vue';  
-import Homepage from './components/Homepage.vue'
+import Homepage from './components/HomePage.vue'
+import Dashboard from './components/Dashboard.vue'; 
+
 
 const routes = [
-    { path: '/', component: Homepage },
-    { path: '/HelloWorld', component: HelloWorld },
-    
+    { path: '/', component : Homepage },
+    { path: '/dashboard', name: 'dashboard', component: Dashboard}
 ]
 
 const router = createRouter({
@@ -20,3 +21,4 @@ const app = createApp(App);
 app.use(router);
 
 app.mount('#app');
+

@@ -3,10 +3,12 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using webapi.Models;
-using webapi.Db;
+using webapi;
 
 namespace webapi.Helpers;
 
+
+//black magic
 static public class Cookie
 {
 

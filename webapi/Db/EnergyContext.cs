@@ -1,7 +1,7 @@
 using System.Data.Entity;
 using webapi.Models;
 
-namespace webapi.Db;
+namespace webapi;
 
 public class EnergyContext : DbContext
 {

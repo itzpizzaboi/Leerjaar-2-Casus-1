@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using webapi.Helpers;
 using webapi.Models;
-using webapi.Db;
+using webapi;
 
 namespace webapi.Controllers;
 
